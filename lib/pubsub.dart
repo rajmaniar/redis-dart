@@ -14,17 +14,17 @@ class PubSub{
     _command=new  Command(command._connection);
     _forever = command.send_nothing().then((_){
       //override socket with warrning
-      command._connection = new _WarrningPubSubInProgress(); 
+      command._connection = new _WarrningPubSubInProgress();
       // listen and process forever
       return Future.doWhile((){
-          return _command._connection._senddummy()
-          .then<bool>((var data){
-              _stream_controler.add(data);
-               return true;
-          }).catchError((e) {
-            _stream_controler.addError(e);
-            return true;
-          });
+        return _command._connection._senddummy()
+            .then<bool>((var data) {
+          _stream_controler.add(data);
+          return true;
+        }).catchError((e) {
+          _stream_controler.addError(e);
+          return true;
+        });
       });
     });
   }
