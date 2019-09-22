@@ -21,6 +21,9 @@ class PubSub{
           .then<bool>((var data){
               _stream_controler.add(data);
                return true;
+          }).catchError((e) {
+            _stream_controler.addError(e);
+            return true;
           });
       });
     });
