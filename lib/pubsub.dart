@@ -23,7 +23,8 @@ class PubSub{
           return true;
         }).catchError((e) {
           _stream_controler.addError(e);
-          return true;
+          _command._connection.close();
+          return false;
         });
       });
     });
